@@ -11,7 +11,7 @@ Each of the above repos have been modified to suit my application and can be fou
 
 ## Setup
 Follow these instructions:  
-1. Initial installation  
+I) Initial installation  
 ```console  
 $ git clone https://github.com/sriramcu/yolov3_traffic_violation_tracking
 $ cd yolov3_traffic_violation_tracking
@@ -20,12 +20,25 @@ $ sudo apt update
 $ sudo apt install libqt5x11extras5
 $ sudo apt install libgl1-mesa-glx
 ```  
-2. Downloading Large Files  
+II) Downloading Large Files  
 Since these files exceed 100 MB, you must visit the links given below and add the files in the proper directory.**The program will fail if these files aren't placed in the correct directory.**  
 A pull request for performing this step using the console would be appreciated.
 
-I)  [yolov3.weights](https://drive.google.com/file/d/16XNa9Zt5GfgeCNW0fl8Hfx9ZaPQ2OEtt/view?usp=sharing). Put this file in the keras-yolo3/ subdirectory.  
-II) [core](https://drive.google.com/file/d/17Uu7X9-MI0e0SetrV2ZReHOk1buWPfMH/view?usp=sharing). Put this file in the yolov3_Helmet_Detection/ subdirectory.  
-III)[yolov3-obj_2400.weights](https://drive.google.com/file/d/16Pr_4FbOkoktDDE8rZpB8b2bh-GYouJl/view?usp=sharing). Put this file in the yolov3_Helmet_Detection/ subdirectory.  
+1.  [yolov3.weights](https://drive.google.com/file/d/16XNa9Zt5GfgeCNW0fl8Hfx9ZaPQ2OEtt/view?usp=sharing). Put this file in the keras-yolo3/ subdirectory.  
+2. [core](https://drive.google.com/file/d/17Uu7X9-MI0e0SetrV2ZReHOk1buWPfMH/view?usp=sharing). Put this file in the yolov3_Helmet_Detection/ subdirectory.  
+3. [yolov3-obj_2400.weights](https://drive.google.com/file/d/16Pr_4FbOkoktDDE8rZpB8b2bh-GYouJl/view?usp=sharing). Put this file in the yolov3_Helmet_Detection/ subdirectory.
+
+III) Set up API key for ANPR
+Get your ANPR API key from [here](https://platerecognizer.com/?utm_source=github&utm_medium=website). Name this file as api_key.txt and place it in the current folder(yolov3_traffic_violation_tracking).
+
+
+## Usage
+```console
+$ python3 gui.py
+```
+Above command launches the GUI from where you can run the program.  
+
+That's all for now. But much more is still to come in the future! Stay tuned.  
+
 
 
