@@ -71,14 +71,14 @@ def enter_records(e1,e2,e3):
     
 def run_program():
   
-    os.chdir('/home/sriram/dad/cisco_project_3sep/keras-yolo3/')
+    os.chdir(os.path.join(os.path.dirname(__file__),'keras-yolo3'))
     os.system('python3 yolo_video.py --score 0.7 --input demo_input.mp4 --output demo_output.mp4')
     
             
 def generate_challans():
     #gj1md1577
     #gj01uk5541
-    os.chdir('/home/sriram/dad/cisco_project_3sep/keras-yolo3/')
+    os.chdir(os.path.join(os.path.dirname(__file__),'keras-yolo3'))
     os.system('python3 lpr.py')
     for f in os.listdir('violations'):
         lplate = f.split('.')[0]
@@ -126,9 +126,10 @@ def generate_challans():
         canvas.save()
     
     labelr = Label(master,  
-              text ="All challans generated, stored in folder /home/sriram/dad/cisco_project_3sep/keras-yolo3/challans") 
+              text ="All challans generated, stored in folder"+ str(os.path.join(os.path.dirname(__file__),'keras-yolo3','challans')))
   
     labelr.pack(pady = 10) 
+    print("Challans generated.")
 
     #labelr['text'] = ""
     
