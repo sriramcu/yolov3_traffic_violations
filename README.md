@@ -1,4 +1,4 @@
-# yolov3_traffic_violation_tracking
+# yolov3_traffic_violations
 This application is an automated system of traffic monitoring to detect violations. As of now, helmet violations detection is supported, but in future I am planning to add wrong side driving detection. The program automatically generates traffic violation tickets (or challans) based on registration details added to the database. Demonstration of the application along with the explanation of the source code is shown in [this video](https://github.com/sriramcu/yolov3_traffic_violation_tracking/blob/master/demo_full.mp4).  
 The above video will be documented here in the near future.  
   
@@ -13,8 +13,8 @@ Each of the above repos have been modified to suit my application and can be fou
 Follow these instructions:  
 I) Initial installation  
 ```console  
-$ git clone https://github.com/sriramcu/yolov3_traffic_violation_tracking
-$ cd yolov3_traffic_violation_tracking
+$ git clone https://github.com/sriramcu/yolov3_traffic_violations
+$ cd yolov3_traffic_violations
 $ pip install -r requirements.txt
 $ sudo apt update 
 $ sudo apt install libqt5x11extras5
