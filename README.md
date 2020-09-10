@@ -7,7 +7,7 @@ This project is based on three currently existing git repos:
 2. [qqwweee/keras-yolo3](https://github.com/qqwweee/keras-yolo3)
 3. [marcbelmont/deep-license-plate-recognition](https://github.com/marcbelmont/deep-license-plate-recognition)  
 
-Each of the above repos have been modified to suit my application and can be found in their respective directories with the original README and LICENSE. Since the first repo  is licensed under GPL, this repo will also be licensed under GPL. Refer to 
+Each of the above repos have been modified to suit my application and can be found in their respective directories with the original README and LICENSE. Since the first repo  is licensed under GPL v3.0, this repo will also be licensed under GPL v3.0. Refer to [LICENSE](https://github.com/sriramcu/yolov3_traffic_violation_tracking/blob/master/LICENSE) file for details.
 
 ## Setup
 Follow these instructions:  
@@ -19,5 +19,13 @@ $ pip install -r requirements.txt
 $ sudo apt update 
 $ sudo apt install libqt5x11extras5
 $ sudo apt install libgl1-mesa-glx
-```
+```  
+2. Downloading Large Files  
+Since these files exceed 100 MB, you must visit the links given below and add the files in the proper directory.**The program will fail if these files aren't placed in the correct directory.**  
+A pull request for performing this step using the console would be appreciated.
+
+I)  [yolov3.weights](https://drive.google.com/file/d/16XNa9Zt5GfgeCNW0fl8Hfx9ZaPQ2OEtt/view?usp=sharing). Put this file in the keras-yolo3/ subdirectory.  
+II) [core](https://drive.google.com/file/d/17Uu7X9-MI0e0SetrV2ZReHOk1buWPfMH/view?usp=sharing). Put this file in the yolov3_Helmet_Detection/ subdirectory.  
+III)[yolov3-obj_2400.weights](https://drive.google.com/file/d/16Pr_4FbOkoktDDE8rZpB8b2bh-GYouJl/view?usp=sharing). Put this file in the yolov3_Helmet_Detection/ subdirectory.  
+
 
