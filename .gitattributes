@@ -1,7 +1,9 @@
 /**.cpp linguist-detectable=false
 /**.c linguist-detectable=false
+/**.h linguist-detectable=false
 /**/**.c linguist-detectable=false
 /**/**.cpp linguist-detectable=false
 /**/**.h linguist-detectable=false
-deep-license-plate-recognition/cpp/**.c linguist-detectable=false
-deep-license-plate-recognition/cpp/**.cpp linguist-detectable=false
+/deep-license-plate-recognition/cpp/**.c linguist-detectable=false
+/deep-license-plate-recognition/cpp/**.cpp linguist-detectable=false
+/deep-license-plate-recognition/cpp/**.h linguist-detectable=false
