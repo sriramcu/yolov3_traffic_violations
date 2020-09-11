@@ -1,4 +1,4 @@
-*.cpp linguist-detectable=false
-*.c linguist-detectable=false
+/**.cpp linguist-detectable=false
+/**.c linguist-detectable=false
 /*/*.c linguist-detectable=false
 deep-license-plate-recognition/cpp/*.c linguist-detectable=false
