@@ -8,6 +8,8 @@ from tkinter.ttk import *
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas as canvas1
 import datetime
+
+
 # creates a Tk() object 
 master = Tk() 
   
@@ -135,30 +137,35 @@ def generate_challans():
     
 
   
-  
-label = Label(master,  
-              text ="This is the main window") 
-  
-label.pack(pady = 10) 
-  
-# a button widget which will open a  
-# new window on button click 
-btn = Button(master,  
-             text ="Click to open database entry",  
-             command = openNewWindow) 
-btn.pack(pady = 10) 
+def main(): 
+    label = Label(master,  
+                text ="This is the main window") 
+    
+    label.pack(pady = 10) 
+    
+    # a button widget which will open a  
+    # new window on button click 
+    btn = Button(master,  
+                text ="Click to open database entry",  
+                command = openNewWindow) 
+    btn.pack(pady = 10) 
 
 
-btn2 = Button(master,  
-             text ="Click to run helmet detection program",  
-             command = run_program) 
-btn2.pack(pady = 10) 
-  
-  
-btn3 = Button(master,  
-             text ="Click to generate challans",  
-             command = generate_challans) 
-btn3.pack(pady = 10) 
+    btn2 = Button(master,  
+                text ="Click to run helmet detection program",  
+                command = run_program) 
+    btn2.pack(pady = 10) 
+    
+    
+    btn3 = Button(master,  
+                text ="Click to generate challans",  
+                command = generate_challans) 
+    btn3.pack(pady = 10) 
 
-# mainloop, runs infinitely 
-mainloop() 
+    # mainloop, runs infinitely 
+    mainloop() 
+
+
+if __name__ == "__main__":
+    main()
+
