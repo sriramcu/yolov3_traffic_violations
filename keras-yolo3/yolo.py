@@ -288,6 +288,8 @@ class YOLO(object):
                         I = cv2.cvtColor(img_arr1, cv2.COLOR_BGR2RGB)
                         image2 = Image.fromarray(I,mode='RGB')
                         im_crop = image2.crop((max(pair[1][0]-30,0),max(pair[0][1]-30,0),pair[1][2]+30,pair[1][3]+30))
+                        # Comment out below line to disable challan images popping up during execution
+                        # todo control this using argparse
                         im_crop.show()
                         #parts = img.rsplit('.',1)
                         #im_crop.save(os.path.join('cropped_images',parts[0]+str(ctr)+'.'+parts[1]))

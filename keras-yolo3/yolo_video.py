@@ -68,6 +68,7 @@ def detect_img(yolo,img,video_mode=False):
         
         #below code written by sriramcu
         r_image.save('all_detections/'+img)
+        
         plt.imshow(r_image)
         plt.show()
         
