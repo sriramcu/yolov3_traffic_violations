@@ -1,8 +1,6 @@
 #!/bin/bash -i
 
 pip install gdown
-git clone https://github.com/sriramcu/yolov3_traffic_violations
-cd yolov3_traffic_violations
 pip install -r requirements.txt
 sudo apt update 
 sudo apt install libqt5x11extras5
