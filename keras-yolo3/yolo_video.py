@@ -151,16 +151,19 @@ if __name__ == '__main__':
     # class YOLO defines the default value, so suppress any default here
     parser = argparse.ArgumentParser(argument_default=argparse.SUPPRESS)
     for f in os.listdir('cropped_images'):
-        os.remove(os.path.join('cropped_images',f))
+        if "placeholder.txt" not in f:
+            os.remove(os.path.join('cropped_images',f))
     
     for f in os.listdir('all_detections'):
-        os.remove(os.path.join('all_detections',f))
+        if "placeholder.txt" not in f:
+            os.remove(os.path.join('all_detections',f))
         
     #for f in os.listdir('violations'):
         #os.remove(os.path.join('violations',f))
         
     for f in os.listdir('helmet_detections'):
-        os.remove(os.path.join('helmet_detections',f))
+        if "placeholder.txt" not in f:
+            os.remove(os.path.join('helmet_detections',f))
     '''
     Command line options
     '''

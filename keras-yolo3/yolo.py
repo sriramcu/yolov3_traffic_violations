@@ -16,13 +16,16 @@ from PIL import Image, ImageFont, ImageDraw
 from yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
 from yolo3.utils import letterbox_image
 import os
-from keras.utils import multi_gpu_model
 import matplotlib.pyplot as plt
 import cv2
 import sys
 sys.path.append('../yolov3_Helmet_Detection/')
 import Helmet_detection_YOLOV3 as hdy
 import psutil
+from tensorflow.python.framework.ops import disable_eager_execution
+disable_eager_execution()
+
+
 ctr1 = 0
 class Point: 
     def __init__(self, x, y): 
@@ -121,7 +124,9 @@ class YOLO(object):
         # Generate output tensor targets for filtered bounding boxes.
         self.input_image_shape = K.placeholder(shape=(2, ))
         if self.gpu_num>=2:
-            self.yolo_model = multi_gpu_model(self.yolo_model, gpus=self.gpu_num)
+            # self.yolo_model = multi_gpu_model(self.yolo_model, gpus=self.gpu_num)
+            print("Multiple GPUs are not supported at this time. Please run the code using only 1 GPU.")
+            sys.exit(-1)
         boxes, scores, classes = yolo_eval(self.yolo_model.output, self.anchors,
                 len(self.class_names), self.input_image_shape,
                 score_threshold=self.score, iou_threshold=self.iou)

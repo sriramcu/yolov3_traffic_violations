@@ -14,3 +14,6 @@ mv yolov3.weights keras-yolo3/yolov3.weights
 mv core yolov3_Helmet_Detection/core
 mv yolov3-obj_2400.weights yolov3_Helmet_Detection/yolov3-obj_2400.weights
 
+cd keras_yolo3/
+python convert.py yolov3.cfg yolov3.weights model_data/yolo.h5
+cd ..
