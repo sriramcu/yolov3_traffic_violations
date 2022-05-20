@@ -291,6 +291,7 @@ class YOLO(object):
                         # Comment out below line to disable challan images popping up during execution
                         # todo control this using argparse
                         im_crop.show()
+                        
                         #parts = img.rsplit('.',1)
                         #im_crop.save(os.path.join('cropped_images',parts[0]+str(ctr)+'.'+parts[1]))
                         im_crop.save(os.path.join('cropped_images',str(ctr1)+'.jpg'))
