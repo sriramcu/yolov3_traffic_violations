@@ -6,9 +6,9 @@ sudo apt update
 sudo apt install libqt5x11extras5
 sudo apt install libgl1-mesa-glx
 
-gdown '1ADn1oljvY_sjHrycz_xk7WWfVkXlErde'
-gdown '18sgeHlupSZ2lgoqsVICegfaqqVyV89mT'
-gdown '1ePhQZYf2y_4T7VlgwOoWgYNmk0_y_tro'
+gdown '1T2sE0otIjKyagdP0dLCNtZ6u26fF6A_z'
+gdown '1bj8dTxl1anTF0U1Tq3awx7bnWOGUWEJa'
+gdown '1ncy-D_En32nMopdld9mXr972234LqMzd'
 
 mv yolov3.weights keras-yolo3/yolov3.weights
 mv core yolov3_Helmet_Detection/core
