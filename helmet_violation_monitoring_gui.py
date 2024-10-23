@@ -1,22 +1,20 @@
 import datetime
 import os
-import shutil
 import sqlite3
 from tkinter import Tk, Label, Button, mainloop, Toplevel, Entry
 
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas as canvas1
 
-from deep_license_plate_recognition.plate_recognition import recognition_api
-from keras_yolo3.yolo import detect_video, YOLO
+from keras_yolo3.yolo import detect_video, YOLO, CROPPED_IMAGES_DIRECTORY
+from run_lpr import run_lpr
 
 VEHICLES_DB_FILE = 'vehicles.db'
-CROPPED_IMAGES_DIR = os.path.join('keras_yolo3', 'cropped_images')
 VIOLATIONS_IMAGES_DIR = os.path.join('keras_yolo3', 'violations')
 CHALLANS_DIR = "challans"
 
 # create folders if not present
-for dirname in [CROPPED_IMAGES_DIR, VIOLATIONS_IMAGES_DIR, CHALLANS_DIR]:
+for dirname in [CROPPED_IMAGES_DIRECTORY, VIOLATIONS_IMAGES_DIR, CHALLANS_DIR]:
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
@@ -85,18 +83,7 @@ def generate_challans():
     api_key = api_key.strip()
     af.close()
 
-    for cropped_image in os.listdir(CROPPED_IMAGES_DIR):
-        if "unknown" in cropped_image.lower():
-            continue
-        cropped_image_path = os.path.join(CROPPED_IMAGES_DIR, cropped_image)
-        api_res = recognition_api(cropped_image_path, api_key=api_key)
-        license_plate_str = api_res['results'][0]['plate']
-        if 'unknown' in license_plate_str:
-            filename, file_extension = os.path.splitext(cropped_image)
-            shutil.move(cropped_image_path, os.path.join(CROPPED_IMAGES_DIR, filename + "_unknown" + file_extension))
-        else:
-            shutil.move(os.path.join(CROPPED_IMAGES_DIR, cropped_image), os.path.join(VIOLATIONS_IMAGES_DIR, license_plate_str.strip() + '.jpg'))
-
+    run_lpr(api_key)  # generates and saves images of violations with their license plate in VIOLATIONS_IMAGES_DIR
     for violation in os.listdir(VIOLATIONS_IMAGES_DIR):
         license_plate_str = violation.split('.')[0]
         conn = sqlite3.connect(VEHICLES_DB_FILE)
@@ -135,7 +122,8 @@ def generate_challans():
         canvas.drawString(30, 450, 'FINE:')
         canvas.drawString(300, 450, 'Rs. 500')
 
-        canvas.drawImage(os.path.join('violations', violation), 30, 150, 250, 250, preserveAspectRatio=True, mask='auto')
+        canvas.drawImage(os.path.join(VIOLATIONS_IMAGES_DIR, violation), 30, 150, 250, 250, preserveAspectRatio=True,
+                         mask='auto')
 
         canvas.save()
 

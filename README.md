@@ -37,6 +37,15 @@ pedestrians not wearing helmets or scooters that are parked with no helmet.
 * Before running the helmet detection program, vehicle data is assumed to have been entered via the GUI, i.e. 
   vehicle license plates, name and address of the owner (3 columns).
 
+### Changes made to submodules referenced in the Acknowledgments Section
+
+* The deep_license_plate_recognition module has minimal changes. 
+* The yolov3_Helmet_Detection folder contains moderate changes, such as minor tweaks in the Helmet_detection_YOLOv3.py program and some more input images 
+  to test the helmet detection module separately. 
+* Major changes are made in the keras_yolo3 module including converting hyphen to underscore in the folder name 
+  and adding __init__.py file to use it as a python module in the main GUI code. Significant changes made to 
+  yolo.py (in detect_image() and detect_video() functions).
+
 
 ## Setup
 Follow these instructions:  
