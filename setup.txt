@@ -1,3 +1,0 @@
-pip install opencv-python;pip install matplotlib;pip install keras==2.3.1;pip install matplotlib;pip install psutil
-apt update;apt install -y libqt5x11extras5;apt install -y libgl1-mesa-glx
-python3 yolo_video.py --score 0.7 --input input_vid.mp4 --output myop.mp4

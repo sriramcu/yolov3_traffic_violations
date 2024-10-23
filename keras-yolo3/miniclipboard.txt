@@ -1,1 +1,0 @@
-python3 yolo_video.py --score 0.7 --input new_input2.mp4 --output myop.mp4
