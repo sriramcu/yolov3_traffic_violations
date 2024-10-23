@@ -65,7 +65,7 @@ II) Downloading Large Files
 1.  [yolov3.weights](https://drive.google.com/file/d/16XNa9Zt5GfgeCNW0fl8Hfx9ZaPQ2OEtt/view?usp=sharing). Put this file in the keras-yolo3/ subdirectory.  
 2. [core](https://drive.google.com/file/d/17Uu7X9-MI0e0SetrV2ZReHOk1buWPfMH/view?usp=sharing). Put this file in the yolov3_Helmet_Detection/ subdirectory.  
 3. [yolov3-obj_2400.weights](https://drive.google.com/file/d/16Pr_4FbOkoktDDE8rZpB8b2bh-GYouJl/view?usp=sharing). Put this file in the yolov3_Helmet_Detection/ subdirectory.
-4. (todo- check if yolo.h5 is needed)
+4. (todo- check if yolo.h5 is needed, demo video, detect_video independent, update screenshots)
 
 III) Set up API key for ANPR  
 Get your ANPR API key from [here](https://platerecognizer.com/?utm_source=github&utm_medium=website). Name this file as api_key.txt and place it in the current folder(yolov3_traffic_violation_tracking).

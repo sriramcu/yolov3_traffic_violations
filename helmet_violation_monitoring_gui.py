@@ -1,7 +1,8 @@
 import datetime
 import os
 import sqlite3
-from tkinter import Tk, Label, Button, mainloop, Toplevel, Entry
+import time
+from tkinter import Tk, Label, Button, mainloop, Toplevel, Entry, filedialog
 
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas as canvas1
@@ -72,7 +73,24 @@ def enter_records(e1, e2, e3):
 
 
 def run_program():
-    detect_video(YOLO(**{"score": 0.7}), "demo_input.mp4", "demo_output.mp4")
+    root = Tk()
+    root.withdraw()
+
+    input_video = filedialog.askopenfilename(
+        title="Select Input Video File",
+        filetypes=(("MP4 files", "*.mp4"), ("All files", "*.*"))
+    )
+
+    output_folder = filedialog.askdirectory(
+        title="Select Output Folder"
+    )
+
+    if input_video and output_folder:
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        output_video = os.path.join(output_folder, f"demo_output_{timestamp}.mp4")
+        detect_video(YOLO(score=0.7), input_video, output_video)
+    else:
+        print("No file or folder selected!")
 
 
 def generate_challans():
