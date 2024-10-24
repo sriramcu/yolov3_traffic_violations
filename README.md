@@ -113,11 +113,14 @@ By default input images are stored in `yolov3_Helmet_Detection/images` folder an
 
 IV) To run just the **ANPR on a batch of images**, stored in `keras_yolo3/cropped_images` folder,  
 `python run_lpr.py`.   
+
 Some additional images are stored in `keras_yolo3/input_frames` folder, which you can 
 manually move to the `keras_yolo3/cropped_images` folder before running the program. As mentioned in the high 
 level overview section, the violations will be stored in `keras_yolo3/violations` folder. Challans can then be 
 generating using the "Generate Challans" button in the main GUI without having to run the helmet detection via 
 the GUI.
+
+---
 
 ## Output
 
