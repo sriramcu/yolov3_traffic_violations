@@ -180,6 +180,7 @@ def postprocess(fn,frame, outs,saved_folder = 'test_out',only_boxes=False):
 
 # Process inputs
 def main(folderName='images',outputFolder ='test_out'):
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     winName = 'Deep learning object detection in OpenCV'
 
 
