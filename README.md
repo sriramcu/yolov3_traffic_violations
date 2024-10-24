@@ -100,6 +100,8 @@ correct by seeing the output printed by the above program, which mentions this a
 actual computation FPS measured on a test input video, and the FPS of the input video file. Then, with minimal 
 changes to the `yolo.py` program, you can try real time applications.
 
+---
+
 II) To run the **helmet violations tracking module separately** on the command line,  
 `python keras_yolo3/yolo_video.py keras_yolo3/input_videos/demo_input.mp4 keras_yolo3/output_videos/demo_output_cmd.mp4`
 
