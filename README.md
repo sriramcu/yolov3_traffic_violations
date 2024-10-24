@@ -80,7 +80,7 @@ file in the `keras-yolo3/` subdirectory.
 
 **III) Set up API key for ANPR**  
 Get your ANPR API key from [here](https://platerecognizer.com/?utm_source=github&utm_medium=website). Name this 
-file as `api_key.txt` and place it in the current folder (`yolov3_traffic_violation_tracking`).
+file as `api_key.txt` and place it in the root directory of the project.
 
 
 ## Usage
