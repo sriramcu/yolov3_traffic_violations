@@ -100,17 +100,18 @@ correct by seeing the output printed by the above program, which mentions this a
 actual computation FPS measured on a test input video, and the FPS of the input video file. Then, with minimal 
 changes to the `yolo.py` program, you can try real time applications.
 
-II) To run the helmet violations tracking module separately on the command line,
+II) To run the **helmet violations tracking module separately** on the command line,  
 `python keras_yolo3/yolo_video.py keras_yolo3/input_videos/demo_input.mp4 keras_yolo3/output/demo_output_cmd.mp4`
 
-III) To run just the helmet detection on a batch of images,  
+III) To run just the **helmet detection on a batch of images**,  
 `python yolov3_Helmet_Detection/Helmet_detection_YOLOV3.py`
 
 By default input images are stored in `yolov3_Helmet_Detection/images` folder and output images are stored in 
 `yolov3_Helmet_Detection/test_out` folder.
 
-IV) To run just the ANPR on a batch of images, stored in `keras_yolo3/cropped_images` folder,
-`python run_lpr.py`. Some additional images are stored in `keras_yolo3/input_frames` folder, which you can 
+IV) To run just the **ANPR on a batch of images**, stored in `keras_yolo3/cropped_images` folder,  
+`python run_lpr.py`.   
+Some additional images are stored in `keras_yolo3/input_frames` folder, which you can 
 manually move to the `keras_yolo3/cropped_images` folder before running the program. As mentioned in the high 
 level overview section, the violations will be stored in `keras_yolo3/violations` folder. Challans can then be 
 generating using the "Generate Challans" button in the main GUI without having to run the helmet detection via 
