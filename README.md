@@ -85,9 +85,10 @@ file as `api_key.txt` and place it in the root directory of the project.
 
 ## Usage
 
-(All the below commands are made when current working directory is the root directory of the project)
+(All the below commands are run in the root directory of the project as the current working directory)
 
-**I) To run the main GUI program,** 
+**I) To run the main GUI program,**  
+
 `python helmet_violation_monitoring_gui.py`
 
 Refer to the demo video and the high level overview to understand the features of the GUI - run helmet 
@@ -105,7 +106,7 @@ changes to the `yolo.py` program, you can try real time applications.
 II) To run the **helmet violations tracking module separately** on the command line,  
 `python keras_yolo3/yolo_video.py keras_yolo3/input_videos/demo_input.mp4 keras_yolo3/output_videos/demo_output_cmd.mp4`
 
-III) To run just the **helmet detection on a batch of images**,  
+III) To run just the **helmet detection on a batch of images without any overlap logic**,  
 `python yolov3_Helmet_Detection/Helmet_detection_YOLOV3.py`
 
 By default input images are stored in `yolov3_Helmet_Detection/images` folder and output images are stored in 
@@ -117,8 +118,8 @@ IV) To run just the **ANPR on a batch of images**, stored in `keras_yolo3/croppe
 Some additional images are stored in `keras_yolo3/input_frames` folder, which you can 
 manually move to the `keras_yolo3/cropped_images` folder before running the program. As mentioned in the high 
 level overview section, the violations will be stored in `keras_yolo3/violations` folder. Challans can then be 
-generating using the "Generate Challans" button in the main GUI without having to run the helmet detection via 
-the GUI.
+generating using the "Generate Challans" button in the main GUI without having to run the helmet 
+violations tracking via the GUI.
 
 ---
 

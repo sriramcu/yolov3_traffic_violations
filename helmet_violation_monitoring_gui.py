@@ -232,7 +232,7 @@ def main():
                  command=open_database_entry_window)
     btn.pack(pady=10)
     btn2 = Button(master,
-                  text="Click to run helmet detection program",
+                  text="Click to run helmet violations tracking program",
                   command=run_program)
     btn2.pack(pady=10)
 
