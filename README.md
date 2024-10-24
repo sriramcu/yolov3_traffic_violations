@@ -30,7 +30,9 @@ pedestrians not wearing helmets or scooters that are parked with no helmet.
   bounding box is inside that of a bike's.
 * These violations are cropped out of the overall video frame to the combined dimension of the bike's and the 
   person's bounding boxes with some buffer and stored inside cropped_images folder inside keras_yolo3 folder.
-* The ANPR program is run on these images and stored into violations folder inside keras_yolo3 folder.
+* The ANPR program is run on these cropped images and moved into violations folder inside keras_yolo3 folder, 
+  where the new file names will be the computed license plate of the vehicle. A suffix of "_unknown" is applied to 
+  the filename inside the cropped images folder, so that ANPR can be skipped next time around.
 * A challan is generated for each violation by referencing the vehicles.db sqlite3 database stored in 
   the root directory of the project using the license plate of the vehicle and is stored in challans 
   folder in the root directory of the project.

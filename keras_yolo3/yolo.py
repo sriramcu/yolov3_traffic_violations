@@ -5,22 +5,20 @@ Class definition of YOLO_v3 style detection model on image and video
 
 import colorsys
 import os
-import threading
-from time import sleep
 from timeit import default_timer as timer
 
 import cv2
 import numpy as np
-import psutil
 from PIL import Image, ImageFont, ImageDraw
 from keras import backend as K
 from keras.layers import Input
 from keras.models import load_model
 
 import yolov3_Helmet_Detection.Helmet_detection_YOLOV3 as hdy
+from keras_yolo3.constants import COMPUTATION_FPS
 from keras_yolo3.rectangle_operations import do_overlap, Point
-from yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
-from yolo3.utils import letterbox_image
+from keras_yolo3.yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
+from keras_yolo3.yolo3.utils import letterbox_image
 
 overlapping_frames_counter = 0  # used as filename of cropped violation detected, keeps count b/w many function calls
 CROPPED_IMAGES_DIRECTORY = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'cropped_images')
@@ -28,9 +26,9 @@ CROPPED_IMAGES_DIRECTORY = os.path.join(os.path.abspath(os.path.dirname(__file__
 
 class YOLO(object):
     _defaults = {
-        "model_path": os.path.join(os.path.dirname(__file__), 'model_data','yolo.h5'),
-        "anchors_path": os.path.join(os.path.dirname(__file__), 'model_data','yolo_anchors.txt'),
-        "classes_path": os.path.join(os.path.dirname(__file__), 'model_data','coco_classes.txt'),
+        "model_path": os.path.join(os.path.dirname(__file__), 'model_data', 'yolo.h5'),
+        "anchors_path": os.path.join(os.path.dirname(__file__), 'model_data', 'yolo_anchors.txt'),
+        "classes_path": os.path.join(os.path.dirname(__file__), 'model_data', 'coco_classes.txt'),
         "score": 0.3,
         "iou": 0.45,
         "model_image_size": (416, 416),
@@ -112,7 +110,7 @@ class YOLO(object):
         input_width = 416  # Width of network's input image
         input_height = 416  # Height of network's input image
         # Create a 4D blob from a frame.
-        blob = cv2.dnn.blobFromImage( # type: ignore
+        blob = cv2.dnn.blobFromImage(  # type: ignore
             img_arr, 1 / 255, (input_width, input_height), [0, 0, 0], 1, crop=False)
 
         # Sets the input to the network
@@ -173,7 +171,7 @@ class YOLO(object):
 
             label = '{} {:.2f}'.format(predicted_class, score)
             draw = ImageDraw.Draw(image)
-            label_size = draw.textsize(label, font)  # type: ignore
+            label_size = draw.textlength(label, font)  # type: ignore
 
             top, left, bottom, right = box
             top = max(0, np.floor(top + 0.5).astype('int32'))
@@ -182,8 +180,8 @@ class YOLO(object):
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
             all_boxes.append([label, left, top, right, bottom])
 
-            if top - label_size[1] >= 0:
-                text_origin = np.array([left, top - label_size[1]])
+            if top - label_size >= 0:
+                text_origin = np.array([left, top - label_size])
             else:
                 text_origin = np.array([left, top + 1])
 
@@ -220,7 +218,7 @@ class YOLO(object):
                 l2 = Point(rider_box[0], rider_box[3])  # 631, 42
                 r2 = Point(rider_box[2], rider_box[1])  # 704, 236
 
-                if do_overlap(l1, r1, l2, r2): # bike, rider
+                if do_overlap(l1, r1, l2, r2):  # bike, rider
 
                     for helmet_box in helmet_boxes:
                         l1 = Point(helmet_box[0], helmet_box[3])  # 590,157
@@ -228,7 +226,7 @@ class YOLO(object):
                         l2 = Point(rider_box[0], rider_box[3])  # 631, 42
                         r2 = Point(rider_box[2], rider_box[1])  # 704, 236
 
-                        if do_overlap(l1, r1, l2, r2): # helmet, rider
+                        if do_overlap(l1, r1, l2, r2):  # helmet, rider
                             helmet_detected_for_any_rider = True
                             break
 
@@ -249,7 +247,6 @@ class YOLO(object):
                         im_crop = image2.crop(
                             (max(pair[1][0] - 30, 0), max(pair[0][1] - 30, 0), pair[1][2] + 30, pair[1][3] + 30))
                         # crops the combined image of the violating rider and bike out of the main frame
-                        show_image_for_a_second(im_crop)
                         im_crop.save(os.path.join(CROPPED_IMAGES_DIRECTORY, str(overlapping_frames_counter) + '.jpg'))
                         break
 
@@ -264,6 +261,7 @@ def detect_video(yolo, video_path, output_path=""):
     if not vid.isOpened():
         raise IOError("Couldn't open webcam or video")
     video_four_cc = int(vid.get(cv2.CAP_PROP_FOURCC))
+    total_frames = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
     video_fps = vid.get(cv2.CAP_PROP_FPS)
     video_size = (int(vid.get(cv2.CAP_PROP_FRAME_WIDTH)),
                   int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT)))
@@ -273,21 +271,22 @@ def detect_video(yolo, video_path, output_path=""):
         print("!!! TYPE:", type(output_path), type(video_four_cc), type(video_fps), type(video_size))
         vid_output_stream = cv2.VideoWriter(output_path, 0x7634706d, video_fps, video_size)
 
-    time_elapsed = 0
-    interval_computation_fps = 0
-    fps_string = "FPS: ??"
-    prev_time = timer()
-    skip_counter = -1  # used to count number of frames for which detection has been skipped
-    fps_list = []
-    computation_fps = video_fps  # initially assume output is real time
-    # we calculate a separate fps so that video detection keeps pace with input video stream by skipping frames
-
+    start_time = timer()
+    frame_counter = 0  # used to count number of frames for which detection has been skipped
+    computation_fps = COMPUTATION_FPS
+    time_per_frame = 1 / video_fps
+    time_per_computation_frame = 1 / computation_fps
+    next_computation_time = 0
     while True:
-        skip_counter += 1
-        _, frame = vid.read()
+        frame_counter += 1
+        ret, frame = vid.read()
+        if not ret:
+            break
 
-        if skip_counter % (int(video_fps / computation_fps)) != 0:
-            print("Skipping frame;skip_counter = " + str(skip_counter))
+        current_video_time = frame_counter * time_per_frame
+
+        if current_video_time < next_computation_time:
+            print(f"Skipping frame {frame_counter}; current_video_time = {current_video_time:.2f}")
             continue
         try:
             image = Image.fromarray(frame)
@@ -297,35 +296,19 @@ def detect_video(yolo, video_path, output_path=""):
             return
 
         image, _ = yolo.detect_image(image)
-        displayed_frame = np.asarray(image)
-        curr_time = timer()
-        exec_time = curr_time - prev_time  # time to process this frame
-        prev_time = curr_time
-        time_elapsed = time_elapsed + exec_time
-        interval_computation_fps = interval_computation_fps + 1
-        if time_elapsed > 1:
-            # after every sec of execution, we add the computation fps to a list.
-            # The overall computation fps will be determined based on the multiple values in this list
-            time_elapsed = time_elapsed - 1
-            fps_string = "FPS: " + str(interval_computation_fps)
-            fps_list.append(interval_computation_fps)
-            interval_computation_fps = 0
-            print(fps_string)
-
-        if len(fps_list) >= 7:
-            computation_fps = max(set(fps_list), key=fps_list.count)  # most common element of list
-        cv2.putText(displayed_frame, text=fps_string, org=(3, 15), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.50, color=(255, 0, 0),
-                    thickness=2)
+        displayed_frame = np.array(image)
         cv2.namedWindow("result", cv2.WINDOW_NORMAL)
         cv2.imshow("result", displayed_frame)
         if is_output_stored:
             vid_output_stream.write(displayed_frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+        if frame_counter >= total_frames:
+            break
+        next_computation_time += time_per_computation_frame
+
+    actual_computation_fps = frame_counter / (timer() - start_time)
+    actual_computation_fps = round(actual_computation_fps, 2)
+    print(f"Video processing complete. Assumed computation FPS = {computation_fps}, "
+          f"actual computation FPS = {actual_computation_fps}, source video FPS = {video_fps}")
     yolo.close_session()
-
-
-def show_image_for_a_second(image):
-    image.show()
-    threading.Timer(1.0, image.close).start()
-

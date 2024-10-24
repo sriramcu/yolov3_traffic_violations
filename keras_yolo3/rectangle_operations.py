@@ -19,15 +19,14 @@ person 0.98 [576, 29, 693, 250]
 motorbike 0.94 [590, 157, 668, 270]
 '''
 
+
 def do_overlap(l1, r1, l2, r2):
     # If one rectangle is on left side of other 
     if (l1.x >= r2.x or l2.x >= r1.x):
-        print("SIDE")
         return False
 
     # If one rectangle is above other 
     if (l1.y <= r2.y or l2.y <= r1.y):
-        print("Top")
         return False
     return True
 

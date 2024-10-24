@@ -36,7 +36,7 @@ def getOutputsNames(net):
     # Get the names of all the layers in the network
     layersNames = net.getLayerNames()
     # Get the names of the output layers, i.e. the layers with unconnected outputs
-    return [layersNames[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+    return [layersNames[i - 1] for i in net.getUnconnectedOutLayers()]  # todo it was i[0]
 
 
 # Draw the predicted bounding box
@@ -113,7 +113,6 @@ def postprocess(fn,frame, outs,saved_folder = 'test_out',only_boxes=False):
     my_scores = []
     helmet_boxes = []
     for i in indices:
-        i = i[0]
         box = boxes[i]
         helmet_boxes.append(box)
         left = box[0]
