@@ -101,7 +101,7 @@ actual computation FPS measured on a test input video, and the FPS of the input 
 changes to the `yolo.py` program, you can try real time applications.
 
 II) To run the **helmet violations tracking module separately** on the command line,  
-`python keras_yolo3/yolo_video.py keras_yolo3/input_videos/demo_input.mp4 keras_yolo3/output/demo_output_cmd.mp4`
+`python keras_yolo3/yolo_video.py keras_yolo3/input_videos/demo_input.mp4 keras_yolo3/output_videos/demo_output_cmd.mp4`
 
 III) To run just the **helmet detection on a batch of images**,  
 `python yolov3_Helmet_Detection/Helmet_detection_YOLOV3.py`
