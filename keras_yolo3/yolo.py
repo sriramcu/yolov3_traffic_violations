@@ -272,7 +272,8 @@ def detect_video(yolo, video_path, output_path=""):
         vid_output_stream = cv2.VideoWriter(output_path, 0x7634706d, video_fps, video_size)
 
     start_time = timer()
-    frame_counter = 0  # used to count number of frames for which detection has been skipped
+    frame_counter = 0
+    processed_frame_counter = 0
     computation_fps = COMPUTATION_FPS
     time_per_frame = 1 / video_fps
     time_per_computation_frame = 1 / computation_fps
@@ -306,8 +307,9 @@ def detect_video(yolo, video_path, output_path=""):
         if frame_counter >= total_frames:
             break
         next_computation_time += time_per_computation_frame
+        processed_frame_counter += 1
 
-    actual_computation_fps = frame_counter / (timer() - start_time)
+    actual_computation_fps = processed_frame_counter / (timer() - start_time)
     actual_computation_fps = round(actual_computation_fps, 2)
     print(f"Video processing complete. Assumed computation FPS = {computation_fps}, "
           f"actual computation FPS = {actual_computation_fps}, source video FPS = {video_fps}")
