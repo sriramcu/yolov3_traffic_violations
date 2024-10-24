@@ -3,3 +3,4 @@ api_key.txt
 /yolov3_Helmet_Detection/yolov3-obj_2400.weights
 /keras-yolo3/yolov3.weights
 .idea
+*.pyc
