@@ -99,7 +99,10 @@ The constants.py file in `keras_yolo3/` submodule contains `COMPUTATION_FPS`, wh
 speed at which your system processes a given video. Before trying real time applications, see if this value is 
 correct by seeing the output printed by the above program, which mentions this assumed computation FPS, the 
 actual computation FPS measured on a test input video, and the FPS of the input video file. Then, with minimal 
-changes to the `yolo.py` program, you can try real time applications.
+changes to the `yolo.py` program, you can try real time applications.  
+
+The lower your computation fps, the shorter your output video will be since it saves fewer frames into the 
+output video at the expense of faster processing.
 
 ---
 
