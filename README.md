@@ -35,7 +35,8 @@ pedestrians not wearing helmets or scooters that are parked with no helmet.
 * These violations are cropped out of the overall video frame to the combined dimension of the bike's and the 
   person's bounding boxes with some buffer and stored inside `cropped_images` folder inside `keras_yolo3` folder.
 * The ANPR program is run on these cropped images and moved into `violations` folder inside `keras_yolo3` folder, 
-  where the new file names will be the computed license plate of the vehicle. A suffix of "_unknown" is applied to 
+  where the new file names will be the computed license plate of the vehicle. 
+* In case the license plate cannot be determined by the ANPR module, a suffix of "_unknown" is applied to 
   the filename inside the cropped images folder, so that ANPR can be skipped next time around.
 * A challan is generated for each violation by referencing the `vehicles.db` sqlite3 database stored in 
   the root directory of the project using the license plate of the vehicle and is stored in challans 
@@ -45,17 +46,17 @@ pedestrians not wearing helmets or scooters that are parked with no helmet.
 
 ### Changes made to the submodules referenced in the Acknowledgments Section
 
-* The deep_license_plate_recognition module has minimal changes. 
-* The yolov3_Helmet_Detection folder contains moderate changes, such as minor tweaks in the 
+* The `deep_license_plate_recognition` module has minimal changes. 
+* The `yolov3_Helmet_Detection` folder contains moderate changes, such as minor tweaks in the 
   `Helmet_detection_YOLOv3.py` program and some more input images to test the helmet detection module separately. 
-* Major changes are made in the keras_yolo3 module including converting hyphen to underscore in the folder name 
+* Major changes are made to the `keras_yolo3` module including converting hyphen to underscore in the folder name 
   and adding `__init__.py` file to use it as a python module in the main GUI code. Significant changes made to 
-  `yolo.py` (in `detect_image()` and `detect_video()` functions).
+  `yolo.py` in `detect_image()` and `detect_video()` functions.
 
 
 ## Setup
 Follow these instructions:  
-I) Initial installation  
+**I) Initial installation**  
 
 Clone this repo and then install the requirements:
 `pip install -r requirements.txt`
@@ -66,7 +67,7 @@ $ sudo apt update
 $ sudo apt install libqt5x11extras5
 $ sudo apt install libgl1-mesa-glx
 ```  
-II) Downloading Large Files
+**II) Downloading Large Files**
 
 1. [yolov3.weights](https://drive.google.com/file/d/1ncy-D_En32nMopdld9mXr972234LqMzd/view?usp=sharing). Put this 
 file in the `keras-yolo3/` subdirectory.  
@@ -77,7 +78,7 @@ file in the `keras-yolo3/` subdirectory.
 4. [yolo.h5](https://drive.google.com/file/d/1qgoUvCT2ajo4lkFknRTYRoKrthXoUvNe/view?usp=sharing). Put this file 
    in the `keras-yolo3/model_data/` subdirectory.
 
-III) Set up API key for ANPR  
+**III) Set up API key for ANPR**  
 Get your ANPR API key from [here](https://platerecognizer.com/?utm_source=github&utm_medium=website). Name this 
 file as `api_key.txt` and place it in the current folder (`yolov3_traffic_violation_tracking`).
 
@@ -86,7 +87,7 @@ file as `api_key.txt` and place it in the current folder (`yolov3_traffic_violat
 
 (All the below commands are made when current working directory is the root directory of the project)
 
-I) To run the main GUI program, 
+**I) To run the main GUI program,** 
 `python helmet_violation_monitoring_gui.py`
 
 Refer to the demo video and the high level overview to understand the features of the GUI - run helmet 
