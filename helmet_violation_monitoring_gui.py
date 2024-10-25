@@ -171,6 +171,7 @@ def run_lpr(api_key: str):
             continue
 
         license_plate_str = api_res['results'][0]['plate']
+        print("Detected license plate = ", license_plate_str)
         shutil.move(cropped_image_path,
                     os.path.join(VIOLATIONS_IMAGES_DIR, license_plate_str.strip() + file_extension))
 

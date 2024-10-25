@@ -2,7 +2,7 @@ import argparse
 
 from PIL import Image
 
-from yolo import YOLO, detect_video
+from keras_yolo3.yolo import YOLO, detect_video
 
 
 def detect_img(yolo):
