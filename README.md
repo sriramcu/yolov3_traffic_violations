@@ -146,3 +146,5 @@ Open source contributions or PRs for the project are welcome, especially in the 
 3. Ways to speed up the algorithm- I had to set my computation fps to 2.5 even on the pretty respectable NVIDIA 
    GeForce RTX 3060.
 4. GUI enhancements.
+5. Future proofing to easily port it to the latest YOLO algorithm. Right now many aspects of the program are 
+   hardcoded for the YOLOv3 algorithm.
