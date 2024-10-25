@@ -20,6 +20,12 @@ directories with their original README and LICENSE files.
 
 Watch this video (todo) to see what this project does:
 
+
+https://github.com/user-attachments/assets/d51a7e07-78fd-42e9-98d7-6c21058f683c
+
+
+
+
 ## High level overview
 
 [BlcaKHat/yolov3-Helmet-Detection](https://github.com/BlcaKHat/yolov3-Helmet-Detection) already takes care of 
