@@ -18,7 +18,7 @@ directories with their original README and LICENSE files.
 
 ## Demo Video
 
-Watch this video (todo) to see what this project does:
+Watch this video to see what this project does:
 
 
 https://github.com/user-attachments/assets/d51a7e07-78fd-42e9-98d7-6c21058f683c
